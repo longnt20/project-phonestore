@@ -25,8 +25,8 @@ class EmployeeFactory extends Factory
             'hire_date'=>fake()->dateTime,
             'salary'=>rand(5000000,10000000),
             'is_active'=>rand(0,1),
-            'department_id'=>rand(1,100),
-            'manager_id'=>rand(1,100),
+            'department_id'=>rand(1,3),
+            'manager_id'=>rand(1,3),
             'address'=>fake()->address,
         ];
     }

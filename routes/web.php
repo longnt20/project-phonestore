@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $users = DB::table('users')->get();
+    // $users = DB::table('users')->get();
  
-foreach ($users as $user) {
-    dd($users->toArray());
-}
-    return view('welcome');
+// foreach ($users as $user) {
+//     dd($users->toArray());
+// }
+    return view('master');
 });
 Route::resource('employees', EmployeeController::class);
 Route::delete('employees/{employee}/forceDestroy',[EmployeeController::class, 'forceDestroy'])

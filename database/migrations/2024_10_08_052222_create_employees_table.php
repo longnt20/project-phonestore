@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Department;
+use App\Models\Manager;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,8 +23,8 @@ return new class extends Migration
             $table->dateTime('hire_date');
             $table->decimal('salary',10,2);
             $table->boolean('is_active')->default(1);
-            $table->integer('department_id');
-            $table->integer('manager_id');
+            $table->foreignIdFor(Department::class)->constrained();
+            $table->foreignIdFor(Manager::class)->constrained();
             $table->text('address');
             $table->binary('profile_picture')->nullable();
             $table->timestamps();
