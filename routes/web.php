@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\StudentController;
 use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +25,16 @@ Route::get('/', function () {
 //     dd($users->toArray());
 // }
     return view('master');
-});
+})->middleware('authCheck');
 Route::resource('employees', EmployeeController::class);
 Route::delete('employees/{employee}/forceDestroy',[EmployeeController::class, 'forceDestroy'])
 ->name('employees.forceDestroy');
+Route::resource('students', StudentController::class);
+Route::get('/movie', function () {
+    return view('master');
+})->middleware('checkAge');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'store']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

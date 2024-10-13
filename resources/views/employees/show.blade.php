@@ -6,7 +6,7 @@
      <div class="container">
         <h1>Chi tiết khách hàng:  {{$employee->first_name}}</h1>
         <div class="container">
-            <form method="POST" action="{{route('employees.store')}}" enctype="multipart/form-data">
+            <form enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3 row">
                     <label for="first_name" class="col-4 col-form-label">First_name</label>

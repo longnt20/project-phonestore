@@ -17,12 +17,22 @@
         <nav class="nav justify-content-center  ">
             <a class="nav-link active" href="/" aria-current="page">Trang chủ</a>
             <a class="nav-link" href="{{route('employees.index')}}">Quản lí nhân viên</a>
+            <a class="nav-link" href="{{route('students.index')}}">Quản lí sinh viên</a>
             <a class="nav-link disabled" href="#">Disabled link</a>
         </nav>
 
     </header>
     <main>
         @yield('content')
+       <div class="container text-center text-danger">
+        @if (isset($message))
+        {{$message}}
+    @endif
+    <form action="/logout" method="post">
+        @csrf
+        <button class="btn btn-primary">Logout</button>
+    </form>
+       </div>
     </main>
     <footer>
         <!-- place footer here -->

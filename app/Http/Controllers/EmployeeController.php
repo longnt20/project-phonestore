@@ -44,7 +44,7 @@ class EmployeeController extends Controller
         $data = $request->validate([
             'first_name'        => 'required|max:255',
             'last_name'         => 'required|max:255',
-            'email'             => 'required|email|max:100',
+            'email'             => ['required','email','max:100',Rule::unique('employees')->ignore($employee->id ?? null)],
             'phone'             => ['required', 'string', 'max:20', Rule::unique('employees')->ignore($employee->id ?? null)],
             'date_of_birth'     => 'required|date|max:255',
             'hire_date'         => 'required|string|max:255',
@@ -93,7 +93,9 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        $departments = Department::latest('id')->paginate(5);
+        $managers = Manager::latest('id')->paginate(5);
+        return view('employees.edit', compact('employee','departments','managers'));
     }
 
     /**
@@ -101,7 +103,37 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $data = $request->validate([
+            'first_name'        => 'required|max:255',
+            'last_name'         => 'required|max:255',
+            'email'             => ['required','email','max:100',Rule::unique('employees')->ignore($employee->id ?? null)],
+            'phone'             => ['required', 'string', 'max:20', Rule::unique('employees')->ignore($employee->id ?? null)],
+            'date_of_birth'     => 'required|date|max:255',
+            'hire_date'         => 'required|string|max:255',
+            'salary'            => 'required|max:20',
+            'is_active'         => Rule::in([0, 1]),
+            'department_id'     => 'required|exists:departments,id', // Kiểm tra xem department_id có tồn tại trong bảng departments không
+            'manager_id'        => 'required|exists:managers,id',   // Nếu có manager, kiểm tra xem manager_id có tồn tại trong bảng managers không
+            'address'           => 'required|string|max:255',
+            'profile_picture'   => 'nullable|image|max:2048',
+        ]);
+        try {
+            $data['is_active'] = isset($data['is_active']) ? $data['is_active']:0;
+            if ($request->hasFile('profile_picture')) {
+                $data['profile_picture'] = $request->file('profile_picture')->store('employees', 'public'); 
+             }
+            //  dd($request->all());
+            $employee->update($data);
+            return redirect()
+            ->route('employees.index')
+            ->with('success', true);
+        } catch (\Throwable $th) {
+            if (!empty($data['profile_picture'])) {
+                Storage::disk('public')->delete($data['profile_picture']);
+            }
+            dd($th->getMessage());
+            return back()->with('success', false)->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -109,6 +141,25 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        try {
+            $employee->delete();
+            return redirect()
+            ->route('employees.index')
+            ->with('success', true);
+        } catch (\Throwable $th) {
+            return back()->with('success', false)->with('error', $th->getMessage());
+        }
+    }
+    public function forceDestroy(Employee $employee)
+    {
+        //xóa cứng
+        try {
+            $employee->forceDelete();
+            return redirect()
+            ->route('employees.index')
+            ->with('success', true);
+        } catch (\Throwable $th) {
+            return back()->with('success', false)->with('error', $th->getMessage());
+        }
     }
 }

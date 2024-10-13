@@ -71,18 +71,19 @@
                             <td>
                                 <a class="btn btn-primary" href="{{ route('employees.show', $employ->id) }}"
                                     role="button">Show</a>
-                                <form action="" method="post">
-                                    <a class="btn btn-warning my-2" href="{{ route('employees.destroy', $employ->id) }}"
-                                        role="button">XóaM</a>
+                                <form action="{{ route('employees.destroy', $employ->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="return confirm('Bạn có muốn xóa không ?')" class="btn btn-warning my-2" role="button">XóaM</button>
                                 </form>
-                                <form action="" method="post">
-                                    <a class="btn btn-danger" href="{{ route('employees.forceDestroy', $employ->id) }}"
-                                        role="button">XóaC</a>
+                                <form action="{{route('employees.forceDestroy', $employ->id)}}" method="post" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">XóaC</button>
                                 </form>
-                                <form action="" method="post">
+
                                     <a class="btn btn-success my-2" href="{{ route('employees.edit', $employ->id) }}"
                                         role="button">Sửa</a>
-                                </form>
                             </td>
                         </tr>
                     @endforeach
