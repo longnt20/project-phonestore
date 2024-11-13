@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,27 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')
-->group(function(){
-    Route::get('/user',function(Request $request){
-        return $request->user();
+// Route::middleware('auth:sanctum')
+// ->group(function(){
+//     Route::get('/user',function(Request $request){
+//         return $request->user();
       
-    });
-    Route::post('logout', [AuthController::class, 'logout']);
-});
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+//     });
+//     Route::post('logout', [AuthController::class, 'logout']);
+// });
+// Route::post('register', [AuthController::class, 'register']);
+// Route::post('login', [AuthController::class, 'login']);
+Route::apiResource('projects', ProjectController::class);
+// Route::apiResource('projects.tasks', TaskController::class);
 
 
-// Khởi tạo phiên giao dịch
-Route::post('/start-transaction', [TransactionController::class, 'startTransaction']);
-
-// Cập nhật trạng thái giao dịch
-Route::post('/update-transaction-step', [TransactionController::class, 'updateTransactionStep']);
-
-// Hoàn thành giao dịch
-Route::post('/complete-transaction', [TransactionController::class, 'completeTransaction']);
-
-// Hủy giao dịch
-Route::post('/cancel-transaction', [TransactionController::class, 'cancelTransaction']);
 
