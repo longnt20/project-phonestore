@@ -4,12 +4,16 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\AuthClientController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IphoneController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthClient;
+use App\Models\Brand;
 use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +33,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('authCheck')->group(function () {
     Route::get('profile', [UserController::class, 'profile'])->name('users.profile');
     Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
     Route::get('/dashboard', function () {
         return view('admin.index');
     });

@@ -3,6 +3,14 @@
 <link href="/admin/static/css/app.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('path/to/theme-pagination.css') }}">
+<script src="https://cdn.tiny.cloud/1/v1xjh8if44pvpunpc8kfgxy2kpk16vbzfsuhiyaf6neb7l7f/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<style>
+     .mce-content-body {
+    max-height: 300px; /* Đặt chiều cao tối đa */
+    overflow-y: auto;  /* Bật thanh cuộn dọc */
+    pointer-events: none;  /* Ngăn cản tất cả các sự kiện chuột */
+}
+</style>
 <style>
     .pagination {
         display: flex !important;

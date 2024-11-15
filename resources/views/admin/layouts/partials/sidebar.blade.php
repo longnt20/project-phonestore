@@ -11,31 +11,56 @@
 
             <li class="sidebar-item active">
                 <a class="sidebar-link" href="/dashboard">
-                    <i class="align-middle" data-feather="sliders"></i> <span
-                        class="align-middle">Trang quản trị</span>
+                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Trang quản trị</span>
                 </a>
+            </li>
+
+               <a class="sidebar-link" href="{{route('categories.index')}}">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí danh mục</span>
+                </a>
+
+            <li class="sidebar-item">
+                <div id="accordionFlushExample">
+                    <div class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                        aria-expanded="false" aria-controls="flush-collapseOne">
+                        <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí sản phẩm</span>
+                    </div>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body ms-3">
+                            <a class="sidebar-link" href="{{route('products.index')}}">
+                                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí sản phẩm thường</span>
+                            </a>
+                            <a class="sidebar-link" href="">
+                                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí sản phẩm có biến thể</span>
+                            </a>
+                            <a class="sidebar-link" href="">
+                                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí màu</span>
+                            </a>
+                            <a class="sidebar-link" href="">
+                                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí dung lượng</span>
+                            </a>
+                            <a class="sidebar-link" href="">
+                                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí ảnh</span>
+                            </a>
+                        </div>
+                    </div>
+                    {{-- <a class="sidebar-link" href="">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí danh mục</span>
+                </a> --}}
             </li>
 
             <li class="sidebar-item">
                 <a class="sidebar-link" href="">
-                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí nhân viên</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="">
-                    <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Quản lí sinh viên</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="">
-                    <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Quản lí sản phẩm</span>
+                    <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Quản lí sản
+                        phẩm</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="{{route('users.index')}}">
-                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">Quản lí người dùng</span>
+                <a class="sidebar-link" href="{{ route('users.index') }}">
+                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">Quản lí người
+                        dùng</span>
                 </a>
             </li>
             {{-- <li class="sidebar-item">
@@ -56,8 +81,7 @@
 
             <li class="sidebar-item">
                 <a class="sidebar-link" href="ui-forms.html">
-                    <i class="align-middle" data-feather="check-square"></i> <span
-                        class="align-middle">Forms</span>
+                    <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Forms</span>
                 </a>
             </li>
 
@@ -69,8 +93,7 @@
 
             <li class="sidebar-item">
                 <a class="sidebar-link" href="ui-typography.html">
-                    <i class="align-middle" data-feather="align-left"></i> <span
-                        class="align-middle">Typography</span>
+                    <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">Typography</span>
                 </a>
             </li>
 
@@ -86,8 +109,7 @@
 
             <li class="sidebar-item">
                 <a class="sidebar-link" href="charts-chartjs.html">
-                    <i class="align-middle" data-feather="bar-chart-2"></i> <span
-                        class="align-middle">Charts</span>
+                    <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Charts</span>
                 </a>
             </li>
 
