@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StorageCapacity;
+use App\Models\VariantAttribute;
 use Illuminate\Http\Request;
 
-class StorageCapacityController extends Controller
+class VariantAttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = VariantAttribute::with(['variant','attribute_value'])->latest('id')->paginate(5);
+        // dd($data);
+        return view('admin.variants.index', compact('data'));
     }
 
     /**
@@ -34,7 +36,7 @@ class StorageCapacityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(StorageCapacity $storageCapacity)
+    public function show(VariantAttribute $variantattribute)
     {
         //
     }
@@ -42,7 +44,7 @@ class StorageCapacityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StorageCapacity $storageCapacity)
+    public function edit(VariantAttribute $variantattribute)
     {
         //
     }
@@ -50,7 +52,7 @@ class StorageCapacityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StorageCapacity $storageCapacity)
+    public function update(Request $request, VariantAttribute $variantattribute)
     {
         //
     }
@@ -58,7 +60,7 @@ class StorageCapacityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StorageCapacity $storageCapacity)
+    public function destroy(VariantAttribute $variantattribute)
     {
         //
     }

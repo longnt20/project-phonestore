@@ -53,6 +53,15 @@
                 transform: translate(-100%, 0);
             }
         }
+.custom-hover {
+    color: black;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-hover:hover {
+    color: rgb(19, 150, 220);
+}
     </style>
 </head>
 
@@ -327,14 +336,21 @@
                         <p class="m-3">Xả kho xiaomi giá cực sốc, 12Pro giảm 800k, K50 Ultra giảm giá 1 triệu</p>
                     </div>
                 </div>
-                <div class="d-flex gap-3">
-                    <div class="card align-items-center ms-4" style="width:240px;">
-                        <img src="client/image/Iphone 12 Promax.webp" class="w-85 border border-3 border-primary mt-3"
+                <div class="d-flex gap-1">
+                    @foreach ($data as $pro)   
+                    <div class="card align-items-center ms-3" style="width:240px;">
+                        @php
+                            $images = json_decode($pro->variant->product->image, true);  
+                            @endphp
+                              @if (is_array($images) && !empty($images))
+                              <img src="{{Storage::url($images[0])}}" class="w-85 border border-3 border-primary mt-3"
                             alt="...">
+                      @endif 
+                        
                         <div class="card-body">
-                            <h5 class="card-title">iPhone 12 Promax</h5>
+                            <a class="custom-hover" href="{{route('detailproduct',$pro->id)}}"><h5 class="card-title">{{$pro->variant->product->name}}</h5></a>  
                             <div class="d-flex gap-3">
-                                <p class="card-text text-danger fw-bold">15.000.000đ</p>
+                                <p class="card-text text-danger fw-bold">{{ number_format($pro->variant->price, 0, ',', '.') }}đ<br></p>
                                 <p class="text-decoration-line-through">16.650.000đ</p>
                             </div>
                             <div class="card bg-dark-subtle">
@@ -356,7 +372,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card align-items-center" style="width:240px;">
+                    @endforeach
+                    {{-- <div class="card align-items-center" style="width:240px;">
                         <img src="client/image/Iphone 11 Chính hãng VN.webp"
                             class="w-85 border border-3 border-primary mt-3" alt="...">
                         <div class="card-body">
@@ -383,8 +400,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card align-items-center" style="width:240px;">
+                    </div> --}}
+                    {{-- <div class="card align-items-center" style="width:240px;">
                         <img src="client/image/Iphone 12 Chính hãng VN.webp"
                             class="w-85 border border-3 border-primary mt-3" alt="...">
                         <div class="card-body">
@@ -467,7 +484,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
                 <button class="btn btn-light w-20 my-3 m-auto">Xem tất cả</button>

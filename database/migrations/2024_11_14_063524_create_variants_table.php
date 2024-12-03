@@ -15,10 +15,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('price',8,2);
             $table->integer('quantity');
-            $table->string('variant_image');
-            $table->foreignId('product_id')->constrained('products');
-            $table->foreignId('color_id')->constrained('colors');
-            $table->foreignId('storage_capacitiy_id')->constrained('storage_capacities');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

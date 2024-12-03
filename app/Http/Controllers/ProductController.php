@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attribute as ModelsAttribute;
+use App\Models\AttributeValue;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\Variant;
+use Attribute;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use League\CommonMark\Extension\Attributes\Node\Attributes;
 
 class ProductController extends Controller
 {
@@ -24,7 +30,8 @@ class ProductController extends Controller
     public function create()
     {
         $data = Category::all();
-        return view('admin.products.create', compact('data'));
+        $attributes = ProductAttribute::with('values')->get();
+        return view('admin.products.create', compact('data', 'attributes'));
     }
 
     /**
@@ -37,13 +44,35 @@ class ProductController extends Controller
             'category_id'=>'required',
             'is_active'=>Rule::in(0,1),
             'description'=>'nullable',
-            'image'=>'nullable|image|max:2048',
+            'images' => 'nullable|array',
+            'images.*'=>'image|max:2048',
         ]);
         try {
-            if ($request->hasFile('image')) {
-                $products['image'] = $request->file('image')->store('image', 'public');
+            $imagePath = [];
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    // Kiểm tra tính hợp lệ của ảnh
+                    if ($image->isValid()) {
+                        // Lưu ảnh vào thư mục 'uploads'
+                        $path = $image->store('image', 'public');
+                        $imagePath[] =$path;
+                        // Tùy chọn: Lưu đường dẫn vào database nếu cần
+                    }
+                }
             }
-            Product::query()->create($products);
+            $products['image']=json_encode($imagePath);
+            $product = Product::query()->create($products);
+            //Lưu biến thể
+            foreach ($request->variants as $variantData) {
+                $variant = Variant::create([
+                    'product_id' =>$product->id,
+                    'price' => $variantData['price'],
+                    'quantity' => $variantData['quantity'],
+                ]);
+    
+                // Gắn giá trị thuộc tính
+                $variant->attributes()->sync($variantData['attribute_value_ids']);
+            }
             return redirect('products')->with('success', true);
         } catch (\Throwable $th) {
             //throw $th;
@@ -58,7 +87,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $data = Category::all();
-        return view('admin.products.show', compact('product','data'));
+        $images = json_decode($product->image, true);
+        return view('admin.products.show', compact('product','data','images'));
     }
 
     /**
@@ -67,7 +97,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $data = Category::all();
-        return view('admin.products.edit', compact('product','data'));
+        $images = json_decode($product->image, true);
+        return view('admin.products.edit', compact('product','data','images'));
     }
 
     /**

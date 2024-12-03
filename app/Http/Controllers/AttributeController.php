@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Variant;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 
-class VariantController extends Controller
+class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $data = Variant::with('product','attributes')->latest('id')->paginate(5);
-        // return view('admin.variants.index', compact('data'));
+        //
     }
 
     /**
@@ -35,7 +34,7 @@ class VariantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Variant $variant)
+    public function show(Attribute $attribute)
     {
         //
     }
@@ -43,7 +42,7 @@ class VariantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Variant $variant)
+    public function edit(Attribute $attribute)
     {
         //
     }
@@ -51,7 +50,7 @@ class VariantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Variant $variant)
+    public function update(Request $request, Attribute $attribute)
     {
         //
     }
@@ -59,7 +58,7 @@ class VariantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Variant $variant)
+    public function destroy(Attribute $attribute)
     {
         //
     }

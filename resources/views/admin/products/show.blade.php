@@ -43,7 +43,14 @@
     </div>
     <div class="mt-3 col-6">
         <label for="">Image</label><br>
-        <img src="{{Storage::url($product->image)}}" alt="" srcset="" width="200px">
+        <div class="d-flex gap-3">
+        @if (is_array($images) && !empty($images))
+        @foreach ($images as $img)
+            <img src="{{Storage::url($img)}}" alt="" srcset="" width="80px">
+       
+        @endforeach
+        @endif    
+    </div>
         @error('image')
         <div class="text-danger">{{$message}}</div>
     @enderror

@@ -13,7 +13,17 @@ class Variant extends Model
         'quantity',
         'variant_image',
         'product_id',
-        'color_id',
-        'storage_capacitiy_id',
     ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+    public function attributes()
+    {
+        return $this->belongsToMany(AttributeValue::class, 'variant_attributes');
+    }
+    public function variant_attributes()
+    {
+        return $this->belongsToMany(VariantAttribute::class);
+    }
 }

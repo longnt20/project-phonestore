@@ -8,14 +8,19 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IphoneController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VariantAttributeController;
+use App\Http\Controllers\VariantController;
 use App\Http\Middleware\AuthClient;
 use App\Models\Brand;
 use App\Models\Employee;
 use App\Models\User;
+use App\Models\Variant;
+use App\Models\VariantAttribute;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -34,15 +39,15 @@ Route::middleware('authCheck')->group(function () {
     Route::get('profile', [UserController::class, 'profile'])->name('users.profile');
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('variants', VariantAttributeController::class);
     Route::resource('categories', CategoryController::class);
     Route::get('/dashboard', function () {
         return view('admin.index');
     });
 });
 
-Route::get('/', function () {
-    return view('client.HomePage');
-});
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/DetailProduct/{id}', [HomeController::class, 'detail'])->name('detailproduct');
 //Route Đăng nhập admin
 Route::get('/loginadmin', [AuthController::class, 'showLoginForm'])->name('loginadmin');
 Route::post('/loginadmin', [AuthController::class, 'login']);

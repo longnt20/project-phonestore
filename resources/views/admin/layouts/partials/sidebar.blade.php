@@ -32,7 +32,7 @@
                             <a class="sidebar-link" href="{{route('products.index')}}">
                                 <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí sản phẩm thường</span>
                             </a>
-                            <a class="sidebar-link" href="">
+                            <a class="sidebar-link" href="{{route('variants.index')}}">
                                 <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí sản phẩm có biến thể</span>
                             </a>
                             <a class="sidebar-link" href="">
@@ -42,7 +42,7 @@
                                 <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí dung lượng</span>
                             </a>
                             <a class="sidebar-link" href="">
-                                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí ảnh</span>
+                                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lí kho</span>
                             </a>
                         </div>
                     </div>

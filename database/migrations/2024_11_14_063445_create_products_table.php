@@ -18,7 +18,6 @@ return new class extends Migration
             $table->boolean('is_active');
             $table->text('description');
             $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('brand_id')->constrained('brands');
             $table->timestamps();
         });
     }

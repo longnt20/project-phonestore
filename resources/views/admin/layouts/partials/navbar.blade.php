@@ -157,9 +157,7 @@
                     data-bs-toggle="dropdown">
                     <i class="align-middle" data-feather="settings"></i>
                 </a>
-                @if (session()->has('user'))
-                    
-                
+                @if (session()->has('user')) 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                     data-bs-toggle="dropdown">
                     <img src="{{Storage::url(session('user')->image)}}" class="avatar img-fluid rounded me-1"
